@@ -1,0 +1,9 @@
+<%= form_tag '/temperature_humidities', {method: 'post'} do %>
+    <div class="field">
+      <label>ロガーファイルパス入力</label><br>
+      <%= file_field_tag 'temp_hum[temp_hum_file_path]', :class => 'file_filed' %>
+    </div>
+    <div class="actions">
+      <%= submit_tag '登録' ,{class:'submit_button'} %>
+    </div>
+<% end %>

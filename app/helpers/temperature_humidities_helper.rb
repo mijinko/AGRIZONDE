@@ -1,0 +1,2 @@
+module TemperatureHumiditiesHelper
+end
