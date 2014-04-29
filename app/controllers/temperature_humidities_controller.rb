@@ -1,8 +1,6 @@
+# coding: utf-8
 class TemperatureHumiditiesController < ApplicationController
-  #require 'csv'
-
   layout 'common_layout'
-
   before_action :set_temperature_humidity, only: [:show, :edit, :update, :destroy]
 
   # GET /temperature_humidities
@@ -26,29 +24,11 @@ class TemperatureHumiditiesController < ApplicationController
   def edit
   end
 
-  # POST /temperature_humidities
-  # POST /temperature_humidities.json
   # 画面から入力された温湿度ロガーデータCSVファイルを、データベースに挿入または更新する
   def create
     puts 'temperature_humidities create start'
-    puts params
-    # CSVファイル取得
-    file_data_csv = params[:temp_hum_file_path].read
-    puts file_data_csv
 
-    # TODO 以下の処理を、modelで行う
-    # CSVファイルを走査する
-
-    # 行の種類を判定
-
-    # データ行の場合、行をカンマで分割
-
-    # 同じ日付のデータが既に入っているか確認
-
-    # 同じ日付のデータが既に入っていない場合、日付、場所、温度、湿度を挿入する
-
-    # 同じ日付のデータが既に入っていた場合、同じ日付のデータをいったん削除し、新しいデータの日付、場所、温度、湿度を挿入する
-
+    TemperatureHumidity.import_watch_logger_log_csv(params[:temp_hum_file_path])
 
     @temperature_humidity = TemperatureHumidity.new
 

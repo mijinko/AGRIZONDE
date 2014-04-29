@@ -11,18 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140413140336) do
+ActiveRecord::Schema.define(version: 20140428005621) do
 
   create_table "temperature_humidities", force: true do |t|
-    t.text     "date"
-    t.text     "time"
-    t.integer  "temperature"
-    t.integer  "humidity"
+    t.text     "log_date"
+    t.text     "log_time"
+    t.float    "temperature"
+    t.float    "humidity"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "place_id"
   end
 
-  add_index "temperature_humidities", ["date"], name: "index_temperature_humidities_on_date"
-  add_index "temperature_humidities", ["time"], name: "index_temperature_humidities_on_time"
+  add_index "temperature_humidities", ["log_date"], name: "index_temperature_humidities_on_log_date"
+  add_index "temperature_humidities", ["log_time"], name: "index_temperature_humidities_on_log_time"
+  add_index "temperature_humidities", ["place_id"], name: "index_temperature_humidities_on_place_id"
 
 end
