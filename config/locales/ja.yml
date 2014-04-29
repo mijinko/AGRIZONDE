@@ -1,0 +1,6 @@
+ja:
+  temperature_humidities:
+    index:
+      watch_logger_log_create_message: 'WATCH LOGGER のデータをデータベースに登録しました。'
+      watch_logger_log_update_message: '同日付の WATCH LOGGER のデータが存在していたため、更新しました。'
+      watch_logger_log_error_message: 'WATCH LOGGER のデータの登録に失敗しました。'

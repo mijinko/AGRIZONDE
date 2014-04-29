@@ -5,30 +5,19 @@ class TemperatureHumidity < ActiveRecord::Base
 
   # WATCH_LOGGERのlogのcsvファイルをテーブルに挿入または更新する
   def self.import_watch_logger_log_csv(watch_logger_log_csv)
+    if !watch_logger_log_csv
+      return FAILURE_CREATE_OR_UPDATE
+    end
+
     # csvファイルをデータベースに挿入
-    insert_watch_logger_log_csv(watch_logger_log_csv)
+    return create_or_update_watch_logger_log_csv(watch_logger_log_csv)
   end
 
   private
-  # WATCH_LOGGERのlogのcsvファイルから、含まれる日付を取得する
-  def self.get_watch_logger_log_csv_date(watch_logger_log_csv)
-    date_array =[]
-    watch_logger_log_csv_data = watch_logger_log_csv.read
-
-    # CSVファイルを走査する
-    CSV.parse(watch_logger_log_csv_data.kconv(Kconv::UTF8, Kconv::SJIS)) do |row|
-      if 'SD' == row[0]
-        date_time_string = row[1]
-        date_string = date_time_string.split[0]
-        date_array.push(date_string)
-      end
-    end
-    watch_logger_log_csv.rewind
-    return date_array.uniq
-  end
-
-  # WATCCH_LOGGERのlogのcsvファイルから日付、時間、場所、温度、湿度を挿入する
-  def self.insert_watch_logger_log_csv(watch_logger_log_csv)
+  # WATCH_LOGGERのlogのcsvファイルから日付、時間、場所、温度、湿度を挿入または更新する。挿入された場合
+  def self.create_or_update_watch_logger_log_csv(watch_logger_log_csv)
+    result_string = ''
+    # ファイルを読み込む
     watch_logger_log_csv_data = watch_logger_log_csv.read
 
     # CSVファイルを走査する
@@ -46,7 +35,10 @@ class TemperatureHumidity < ActiveRecord::Base
               place_id: place_id
           }
           if TemperatureHumidity.exists?(exist_hash)
-            logger.info "データさ既に存在しています：#{exist_hash}"
+            logger.info "データが既に存在しています：#{exist_hash}"
+            temperature_humidity_data = TemperatureHumidity.find_by(exist_hash)
+            temperature_humidity_data.update_attributes(temperature: row[2], humidity: row[3])
+            result_string = SUCCESS_UPDATE
           else
             # 日付、場所、温度、湿度を挿入する
             create_hash = {
@@ -57,17 +49,16 @@ class TemperatureHumidity < ActiveRecord::Base
                 place_id: place_id
             }
             TemperatureHumidity.create(create_hash)
-            #date_time_string = row[1]
-            #date_string = date_time_string.split[0]
-            #time_string = date_time_string.split[1]
-            #temp_real = row[2]
-            #hum_real = row[3]
-            #TemperatureHumidity.create(date: date_string, time: time_string, temperature: temp_real, humidity: hum_real)
           end
         end
       end
     end
     watch_logger_log_csv.rewind
-    return
+
+    if SUCCESS_UPDATE != result_string
+      result_string = SUCCESS_CREATE
+    end
+
+    return result_string
   end
 end

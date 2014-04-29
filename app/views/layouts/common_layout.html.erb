@@ -8,6 +8,12 @@
 </head>
 <body class='<%= controller.controller_name %>'>
 <h2>common_layout</h2>
+<% if flash[:notice] %>
+    <div class="alert gr"><p><%= flash[:notice] %></p></div>
+<% end %>
+<% if flash[:alert] %>
+    <div class="alert yl"><p><%= flash[:alert] %></p></div>
+<% end %>
 <%= yield %>
 
 </body>
