@@ -7,14 +7,23 @@
   <%= csrf_meta_tags %>
 </head>
 <body class='<%= controller.controller_name %>'>
-<h2>common_layout</h2>
-<% if flash[:notice] %>
-    <div class="alert gr"><p><%= flash[:notice] %></p></div>
-<% end %>
-<% if flash[:alert] %>
-    <div class="alert yl"><p><%= flash[:alert] %></p></div>
-<% end %>
-<%= yield %>
+<div id="columns">
+  <div id="side">
+    <ul>
+      <li><%= link_to "ロガーデータ登録", temperature_humidities_path %></li>
+    </ul>
+  </div>
 
+  <% if flash[:notice] %>
+      <div class="alert gr"><p><%= flash[:notice] %></p></div>
+  <% end %>
+  <% if flash[:alert] %>
+      <div class="alert yl"><p><%= flash[:alert] %></p></div>
+  <% end %>
+
+  <div id="main">
+    <%= yield %>
+  </div>
+</div>
 </body>
 </html>
