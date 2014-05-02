@@ -7,5 +7,7 @@ class DataReferenceController < ApplicationController
 
   def show_data
     puts 'data_reference_controller show_data start'
+    @test = '試験'
+    # redirect_to
   end
 end
