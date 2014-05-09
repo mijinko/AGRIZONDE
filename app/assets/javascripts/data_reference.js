@@ -14,16 +14,31 @@ $(document).ready(function () {
             if (d < 10) {
                 d = '0' + d;
             }
-            var newDate = y + "-" + m + '-' + d
+            var newDate = y + "/" + m + '/' + d
             $.get(
                 '/data_reference/show_data',
                 {
                     date: newDate
                 },
-                function(data){
+                function (data) {
                     $('body').html(data)
                 }
             );
         }
     });
+
+    $(function () {
+        // 日付データ取得
+        var data_date = $("#graph-data-log-date").html();
+        // 時間データ取得
+        var data_time = eval("(" + $("#graph-data-log-time").html() + ")");
+        // 温度データ取得
+        var data_temp = eval("(" + $("#graph-data-temperature").html() + ")");
+        // 湿度データ取得
+        var data_hum = eval("(" + $("#graph-data-humidity").html() + ")");
+        basic_line_time_vs_temp(document.getElementById("graph-time-vs-temperature"), data_date, data_time, data_temp)
+        basic_line_time_vs_hum(document.getElementById("graph-time-vs-humidity"), data_date, data_time, data_hum)
+        basic_line_time_vs_temp_and_hum(document.getElementById("graph-time-vs-temperature-and-humidity"), data_date, data_time, data_temp, data_hum)
+    });
 });
+

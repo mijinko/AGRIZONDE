@@ -1,3 +1,12 @@
-<h1>DataReference#show_data</h1>
-<p>Find me in app/views/data_reference/show_data.html.erb</p>
-<%= @test %>
+<h1>データ参照</h1>
+<div id="graph-data-log-date"><%= @date %></div>
+<br>
+<%= render partial: 'data_reference/graph_time_vs_temperature_and_humidity' %>
+<%= render partial: 'data_reference/graph_time_vs_temperature' %>
+<%= render partial: 'data_reference/graph_time_vs_humidity' %>
+
+<div class="hidden">
+  <div id="graph-data-log-time"><%= @graph_data_log_time %></div>
+  <div id="graph-data-temperature"><%= @graph_data_temperature %></div>
+  <div id="graph-data-humidity"><%= @graph_data_humidity %></div>
+</div>

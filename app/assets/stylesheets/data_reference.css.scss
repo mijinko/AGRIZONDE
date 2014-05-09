@@ -1,3 +1,7 @@
 // Place all the styles related to the data_reference controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#graph-time-vs-temperature-and-humidity, #graph-time-vs-temperature, #graph-time-vs-humidity {
+  width: 600px;
+  height: 400px;
+}

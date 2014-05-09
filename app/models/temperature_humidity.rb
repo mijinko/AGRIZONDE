@@ -13,6 +13,11 @@ class TemperatureHumidity < ActiveRecord::Base
     return create_or_update_watch_logger_log_csv(watch_logger_log_csv)
   end
 
+  #
+  def self.get_TemperaturHumidites_where_log_date_order_by_log_time(log_date)
+    TemperatureHumidity.where('log_date = ?', log_date).order('log_time ASC')
+  end
+
   private
   # WATCH_LOGGERのlogのcsvファイルから日付、時間、場所、温度、湿度を挿入または更新する。挿入された場合
   def self.create_or_update_watch_logger_log_csv(watch_logger_log_csv)
