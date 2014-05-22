@@ -13,9 +13,14 @@ class TemperatureHumidity < ActiveRecord::Base
     return create_or_update_watch_logger_log_csv(watch_logger_log_csv)
   end
 
-  #
+  # 指定された日付の温度湿度を時間の昇順に取得する
   def self.get_TemperaturHumidites_where_log_date_order_by_log_time(log_date)
     TemperatureHumidity.where('log_date = ?', log_date).order('log_time ASC')
+  end
+
+  # 全日付の平均温度、平均湿度を取得する
+  def self.get_all_date_avg_temp_and_hum()
+    TemperatureHumidity.find_by_sql('SELECT log_date, AVG(temperature) AS "avg_temp", AVG(humidity) AS "avg_hum" FROM temperature_humidities GROUP BY log_date')
   end
 
   private

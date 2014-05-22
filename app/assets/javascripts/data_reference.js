@@ -3,6 +3,9 @@ $(document).ready(function () {
     $('#calendar').fullCalendar({
         monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
         columnFormat: {day: 'yyyy'},
+        events: '/events.json',
+        editable: false,
+        // 日をクリックしたときの処理
         dayClick: function (date) {
             var tempDate = new Date(date);
             var y = tempDate.getFullYear();
