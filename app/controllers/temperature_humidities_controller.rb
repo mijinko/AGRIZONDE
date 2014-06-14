@@ -32,6 +32,8 @@ class TemperatureHumiditiesController < ApplicationController
     else
       # WATCH_LOGGERのログファイルをインポート
       result_string = TemperatureHumidity.import_watch_logger_log_csv(params[:temp_hum_file_path])
+      # 平均温度と湿度を全て走査してeventsテーブルに詰めなおす
+      Event.reflesh_create_avg_temp_and_hum
     end
 
     # メッセージをセット

@@ -18,15 +18,16 @@ $(document).ready(function () {
                 d = '0' + d;
             }
             var newDate = y + "/" + m + '/' + d
-            $.get(
-                '/data_reference/show_data',
-                {
-                    date: newDate
-                },
-                function (data) {
-                    $('body').html(data)
-                }
-            );
+//            $.get(
+//                '/data_reference/show_data',
+//                {
+//                    date: newDate
+//                },
+//                function (data) {
+//                    $('body').html(data)
+//                }
+//            );
+            window.location.href = '/data_reference/show_data?date=' + newDate;
         }
     });
 
@@ -42,6 +43,7 @@ $(document).ready(function () {
         basic_line_time_vs_temp(document.getElementById("graph-time-vs-temperature"), data_date, data_time, data_temp)
         basic_line_time_vs_hum(document.getElementById("graph-time-vs-humidity"), data_date, data_time, data_hum)
         basic_line_time_vs_temp_and_hum(document.getElementById("graph-time-vs-temperature-and-humidity"), data_date, data_time, data_temp, data_hum)
+        basic_line_time_vs_disease(document.getElementById("graph-time-vs-disease"), data_date, data_time, data_temp)
     });
 });
 
