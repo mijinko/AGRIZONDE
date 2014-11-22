@@ -253,3 +253,24 @@ function basic_line_time_vs_disease(container, data_date, data_time) {
         }
     });
 }
+
+// マンスリーデータ折れ線グラフ
+function monthly_data(container) {
+
+    var data = [];
+    var i;
+
+    for (i = 0; i < 10; i++) {
+        data.push([i, i])
+    }
+
+    graph = Flotr.draw(container, [data], {
+        xaxis: {
+            minorTickFreq: 4,
+            tickDecimals: 0
+        },
+        grid: {
+            minorVerticalLines: true
+        }
+    });
+}

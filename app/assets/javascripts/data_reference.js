@@ -30,20 +30,23 @@ $(document).ready(function () {
             window.location.href = '/data_reference/show_data?date=' + newDate;
         }
     });
-
-    $(function () {
-        // 日付データ取得
-        var data_date = $("#graph-data-log-date").html();
-        // 時間データ取得
-        var data_time = eval("(" + $("#graph-data-log-time").html() + ")");
-        // 温度データ取得
-        var data_temp = eval("(" + $("#graph-data-temperature").html() + ")");
-        // 湿度データ取得
-        var data_hum = eval("(" + $("#graph-data-humidity").html() + ")");
-        basic_line_time_vs_temp(document.getElementById("graph-time-vs-temperature"), data_date, data_time, data_temp)
-        basic_line_time_vs_hum(document.getElementById("graph-time-vs-humidity"), data_date, data_time, data_hum)
-        basic_line_time_vs_temp_and_hum(document.getElementById("graph-time-vs-temperature-and-humidity"), data_date, data_time, data_temp, data_hum)
-        basic_line_time_vs_disease(document.getElementById("graph-time-vs-disease"), data_date, data_time, data_temp)
-    });
+});
+$(function () {
+    // 日付データ取得
+    var data_date = $("#graph-data-log-date").html();
+    // 時間データ取得
+    var data_time = eval("(" + $("#graph-data-log-time").html() + ")");
+    // 温度データ取得
+    var data_temp = eval("(" + $("#graph-data-temperature").html() + ")");
+    // 湿度データ取得
+    var data_hum = eval("(" + $("#graph-data-humidity").html() + ")");
+    basic_line_time_vs_temp(document.getElementById("graph-time-vs-temperature"), data_date, data_time, data_temp)
+    basic_line_time_vs_hum(document.getElementById("graph-time-vs-humidity"), data_date, data_time, data_hum)
+    basic_line_time_vs_temp_and_hum(document.getElementById("graph-time-vs-temperature-and-humidity"), data_date, data_time, data_temp, data_hum)
+    basic_line_time_vs_disease(document.getElementById("graph-time-vs-disease"), data_date, data_time, data_temp)
 });
 
+
+$(function () {
+    monthly_data(document.getElementById("monthly-data-graph"));
+});
